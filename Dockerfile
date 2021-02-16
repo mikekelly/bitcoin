@@ -15,8 +15,8 @@ WORKDIR /home/bitcoin/src
 
 RUN ./autogen.sh
 RUN ./configure --with-incompatible-bdb
-RUN make -j"$(($(nproc)+1))" -C src bitcoind bitcoin-cli
-RUN make -j"$(($(nproc)+1))" install
+RUN make -C src bitcoind bitcoin-cli
+RUN make install
 
 RUN bitcoind -version | grep "Bitcoin Core version v${BITCOIN_VERSION}"
 CMD ["bitcoind"]
